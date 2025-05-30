@@ -1,0 +1,128 @@
+1) IPC using popen() and pclose(): 
+ 
+#include<stdio.h> 
+#include<string.h> 
+int main() 
+{ 
+FILE *rd; 
+char buffer[50]; 
+sprintf(buffer,"name first"); 
+rd=popen("wc -c","w"); // wc -c -> is the process which counts the number of characters 
+passed. 2nd parameter is "w" which means pipe is opened in writing mode 
+fwrite(buffer,sizeof(char),strlen(buffer),rd); // to write the data into the pipe 
+pclose(rd); 
+} 
+ 
+OUTPUT: 
+10 
+ 
+ 
+2) IPC using pipe(): 
+ 
+#include<stdio.h> 
+#include<unistd.h> 
+#include<sys/types.h> 
+#include<sys/wait.h> 
+int main() 
+{ 
+int fd[2],n; 
+char buffer[100]; 
+pid_t p; 
+pipe(fd); //creates a unidirectional pipe with two end fd[0] and fd[1] 
+p=fork(); 
+if(p>0) //parent 
+{ 
+printf("Parent Passing value to child\n"); 
+write(fd[1],"hello\n",6); //fd[1] is the write end of the pipe 
+wait(100); 
+else // child 
+{ 
+printf("Child printing received value\n"); 
+24 
+ 
+n=read(fd[0],buffer,100); //fd[0] is the read end of the pipe 
+write(1,buffer,n); 
+} 
+} 
+ 
+OUTPUT: 
+ 
+Parent Passing value to child 
+Child printing received value 
+hello 
+ 
+ 
+PROGRAM: 
+ 
+Creating fifo/named pipe ( 1.c ) 
+#include<stdio.h> 
+#include<sys/types.h> 
+#include<sys/stat.h> 
+int main() 
+{ 
+ 
+ 
+ 
+} 
+ 
+OUTPUT: 
+int res; 
+res = mkfifo("fifo1",0777); //creates a named pipe with the name fifo1 
+printf("named pipe created\n"); 
+ 
+ 
+ 
+named pipe created 
+ 
+ 
+Writing to a fifo/named pipe (sender.c ) 
+#include<unistd.h> 
+#include<stdio.h> 
+#include<fcntl.h> 
+int main() 
+{ 
+ 
+ 
+ 
+ 
+} 
+ 
+ 
+OUTPUT: 
+int res,n; 
+res=open("fifo1",O_WRONLY); 
+write(res,"Message",7); 
+printf("Sender Process %d sent the data\n",getpid()); 
+ 
+ 
+ 
+ 
+Sender Process 150 sent the data 
+25 
+ 
+Reading from the named pipe ( receiver.c ) 
+ 
+#include<unistd.h> 
+#include<stdio.h> 
+#include<fcntl.h> 
+int main() 
+{ 
+ 
+ 
+ 
+ 
+ 
+ 
+} 
+ 
+ 
+OUTPUT: 
+int res,n; 
+char buffer[100]; 
+res=open("fifo1",O_RDONLY); 
+n=read(res,buffer,100); 
+printf("Reader process %d started\n",getpid()); 
+printf("Data received by receiver %d is: %s\n",getpid(), buffer); 
+ 
+Reader Process having PID 46 sent data 
+Data received by receiver is 46
