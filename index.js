@@ -11,4 +11,5 @@ e.get('/:f', (q, s) => {
     s.status(500).send('Server Error');
   }
 });
-e.listen(process.env.PORT || 3000);
+e.listen(process.env.PORT || 9999, '0.0.0.0');
+

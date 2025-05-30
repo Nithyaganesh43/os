@@ -1,0 +1,64 @@
+# calc.sh - Simple Arithmetic Calculator
+echo -n "Enter the two numbers: "
+read a b
+echo "1. Addition"
+echo "2. Subtraction"
+echo "3. Multiplication"
+echo "4. Division"
+echo -n "Enter the option: "
+read option
+case $option in
+1) c=$((a + b)); echo "$a + $b = $c";;
+2) c=$((a - b)); echo "$a - $b = $c";;
+3) c=$((a * b)); echo "$a * $b = $c";;
+4) c=$((a / b)); echo "$a / $b = $c";;
+*) echo "Invalid option";;
+esac
+
+
+# pattern.sh - Pyramid with #
+p=7
+for((m=1;m<=p;m++)); do
+  for((a=m;a<=p;a++)); do echo -n " "; done
+  for((n=1;n<=m;n++)); do echo -n "#"; done
+  for((i=1;i<m;i++)); do echo -n "#"; done
+  echo
+done
+
+
+# pattern1.sh - Half pyramid with *
+rows=4
+for((i=1;i<=rows;i++)); do
+  for((j=1;j<=i;j++)); do echo -n "* "; done
+  echo
+done
+
+
+# Numpattern.sh - Half pyramid with numbers
+rows=5
+for((i=1;i<=rows;i++)); do
+  number=1
+  for((j=1;j<=i;j++)); do
+    echo -n "$number "
+    ((number++))
+  done
+  echo
+done
+
+
+# Fibonacci.sh - Fibonacci series
+echo -n "How many number of terms to be generated? "
+read n
+x=0
+y=1
+echo "Fibonacci Series up to $n terms:"
+if ((n >= 1)); then echo "$x"; fi
+if ((n >= 2)); then echo "$y"; fi
+i=3
+while ((i <= n)); do
+  z=$((x + y))
+  echo "$z"
+  x=$y
+  y=$z
+  ((i++))
+done
