@@ -1,0 +1,55 @@
+#include<stdio.h> 
+#include<unistd.h> 
+int main() 
+{ 
+pid_t t; t=fork(); 
+if(t==0) 
+{ 
+ 
+ 
+} 
+else 
+{ 
+ 
+ 
+} 
+} 
+printf("Child having id %d\n",getpid()); 
+exit(0); 
+ 
+ 
+ 
+printf("Parent having id %d\n",getpid()); 
+sleep(50); // Parent sleeps. Run the ps command during this time
+
+
+
+
+
+4th second one 
+#include<stdio.h > 
+#include<unistd.h> 
+#include<sys/types.h> 
+int main() 
+{ 
+pid_t p; p=fork(); 
+if(p==0) 
+{ 
+ 
+ 
+ 
+} 
+else 
+{ 
+ 
+ 
+} 
+} 
+sleep(5); //child goes to sleep and in the mean time parent terminates 
+printf("I am child having PID %d\n",getpid()); 
+printf("My parent PID is %d\n",getppid()); 
+ 
+ 
+ 
+printf("I am parent having PID %d\n",getpid()); 
+printf("My child PID is %d\n",p);
