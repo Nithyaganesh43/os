@@ -1,0 +1,111 @@
+1) IPC using popen() and pclose():
+
+#include<stdio.h> 
+#include<string.h> 
+int main() 
+{ 
+FILE *rd; 
+char buffer[50]; 
+sprintf(buffer,"name first"); 
+rd=popen("wc -c","w"); 
+fwrite(buffer,sizeof(char),strlen(buffer),rd); 
+pclose(rd); 
+return 0;
+} 
+OUTPUT:
+
+Copy
+Edit
+10
+2) IPC using pipe():
+
+#include<stdio.h> 
+#include<unistd.h> 
+#include<sys/types.h> 
+#include<sys/wait.h> 
+int main() 
+{ 
+int fd[2],n; 
+char buffer[100]; 
+pid_t p; 
+pipe(fd); 
+p=fork(); 
+if(p>0) 
+{ 
+printf("Parent Passing value to child\n"); 
+write(fd[1],"hello\n",6); 
+wait(NULL); 
+} 
+else 
+{ 
+printf("Child printing received value\n"); 
+n=read(fd[0],buffer,100); 
+write(1,buffer,n); 
+} 
+return 0;
+} 
+OUTPUT:
+
+pgsql
+Copy
+Edit
+Parent Passing value to child  
+Child printing received value  
+hello  
+Creating fifo/named pipe (1.c):
+
+#include<stdio.h> 
+#include<sys/types.h> 
+#include<sys/stat.h> 
+int main() 
+{ 
+int res; 
+res = mkfifo("fifo1",0777); 
+printf("named pipe created\n"); 
+return 0;
+} 
+OUTPUT:
+
+
+named pipe created
+Writing to a fifo/named pipe (sender.c):
+
+#include<unistd.h> 
+#include<stdio.h> 
+#include<fcntl.h> 
+int main() 
+{ 
+int res,n; 
+res=open("fifo1",O_WRONLY); 
+write(res,"Message",7); 
+printf("Sender Process %d sent the data\n",getpid()); 
+return 0;
+} 
+OUTPUT:
+
+arduino
+Copy
+Edit
+Sender Process 150 sent the data
+Reading from the named pipe (receiver.c):
+
+#include<unistd.h> 
+#include<stdio.h> 
+#include<fcntl.h> 
+int main() 
+{ 
+int res,n; 
+char buffer[100]; 
+res=open("fifo1",O_RDONLY); 
+n=read(res,buffer,100); 
+printf("Reader process %d started\n",getpid()); 
+printf("Data received by receiver %d is: %s\n",getpid(), buffer); 
+return 0;
+} 
+OUTPUT:
+
+csharp
+Copy
+Edit
+Reader process 46 started  
+Data received by receiver 46 is: Message

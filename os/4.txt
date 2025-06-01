@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<unistd.h>
+#include<stdlib.h>
+
+int main()
+{
+pid_t t; t=fork();
+if(t==0)
+{
+printf("Child having id %d\n",getpid());
+exit(0);
+}
+else
+{
+printf("Parent having id %d\n",getpid());
+sleep(50);
+}
+return 0;
+}
+
+
+
+
+4th second one 
+#include<stdio.h>
+#include<unistd.h>
+#include<sys/types.h>
+
+int main()
+{
+pid_t p; p=fork();
+if(p==0)
+{
+sleep(5);
+printf("I am child having PID %d\n",getpid());
+printf("My parent PID is %d\n",getppid());
+}
+else
+{
+printf("I am parent having PID %d\n",getpid());
+printf("My child PID is %d\n",p);
+}
+return 0;
+}

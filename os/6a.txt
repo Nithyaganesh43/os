@@ -1,0 +1,83 @@
+#include<stdio.h>
+
+struct process
+{
+int pid,at,bt,st,ft,wt;
+} t,ps[10]={0};
+
+int nj,i,j;
+
+void getinput();
+void fcfs();
+void disp();
+
+int main()
+{
+printf("Enter the no of jobs : ");
+scanf("%d",&nj);
+getinput();
+fcfs();
+disp();
+return 0;
+}
+
+void getinput()
+{
+for(i=0;i<nj;i++)
+{
+ps[i].pid=i+1;
+printf("\nEnter arrival time & burst time for job %d : ",i+1);
+scanf("%d%d",&ps[i].at,&ps[i].bt);
+}
+}
+
+void fcfs()
+{
+for(i=0;i<nj-1;i++)
+{
+for(j=i+1;j<nj;j++)
+{
+if(ps[i].at>ps[j].at)
+{
+t=ps[i];
+ps[i]=ps[j];
+ps[j]=t;
+}
+}
+}
+
+for(i=0;i<nj;i++)
+{
+if(i==0)
+{
+ps[i].st=ps[i].at;
+ps[i].ft=ps[i].st+ps[i].bt;
+ps[i].wt=0;
+}
+else
+{
+ps[i].st=(ps[i-1].ft>ps[i].at)?ps[i-1].ft:ps[i].at;
+ps[i].ft=ps[i].st+ps[i].bt;
+ps[i].wt=ps[i].st-ps[i].at;
+}
+}
+}
+
+void disp()
+{
+int tw=0,tt=0;
+float aw,at;
+printf("\n\t\tMETHOD FCFS\n\n");
+printf("ID\tARRIVAL\tBURST\tSTART\tFINISH\tWAIT");
+for(i=0;i<nj;i++)
+{
+printf("\n%d\t%d\t%d\t%d\t%d\t%d",ps[i].pid,ps[i].at,ps[i].bt,ps[i].st,ps[i].ft,ps[i].wt);
+tw+=ps[i].wt;
+tt+=ps[i].ft-ps[i].at;
+}
+
+aw=(float)tw/nj;
+at=(float)tt/nj;
+printf("\n\nAVG WAITING TIME = %f",aw);
+printf("\n\nAVG TURN AROUND TIME = %f",at);
+}

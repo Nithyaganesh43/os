@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+static int full,empty,mutex;
+int buffer[5],in=0,out=0;
+
+void wait(int *a)
+{
+while(*a<=0);
+*a -= 1;
+}
+
+void signal(int *b)
+{
+*b += 1;
+}
+
+void producer()
+{
+int nextp;
+printf("\nProducer\n");
+wait(&empty);
+wait(&mutex);
+nextp=rand()%10+1;
+buffer[in]=nextp;
+printf("\nProduced item is %d\n",nextp);
+in=(in+1)%5;
+signal(&mutex);
+signal(&full);
+printf("\nFull = %d\tEmpty = %d\n",full,empty);
+}
+
+void consumer()
+{
+int nextc;
+printf("\nConsumer\n");
+wait(&full);
+wait(&mutex);
+nextc=buffer[out];
+printf("\nConsumed item is %d\n",nextc);
+out=(out+1)%5;
+signal(&mutex);
+signal(&empty);
+printf("\nFull = %d\tEmpty = %d\n",full,empty);
+}
+
+int main()
+{
+int c;
+mutex=1;
+empty=5;
+full=0;
+while(1)
+{
+printf("\n1.Produce\n2.Consume\n3.Both\n4.Exit\n");
+printf("\nEnter your choice: ");
+scanf("%d",&c);
+switch(c)
+{
+case 1:
+if(empty==0)
+printf("\nProducer has to wait\n");
+else
+producer();
+break;
+case 2:
+if(full==0)
+printf("\nConsumer has to wait\n");
+else
+consumer();
+break;
+case 3:
+if(empty==0)
+{
+printf("\nProducer has to wait\n");
+consumer();
+}
+else if(full==0)
+{
+printf("\nConsumer has to wait\n");
+producer();
+}
+else
+{
+producer();
+consumer();
+}
+break;
+case 4:
+exit(0);
+break;
+default:
+printf("Invalid choice\n");
+}
+}
+return 0;
+}

@@ -1,0 +1,38 @@
+BASE_USRL/os/{filename} =>
+  2   - shell scripting
+  3a  - fork system call
+  3b  - wait system call
+  3c  - exec system call
+  3d  - stat system call
+  3e  - interprocess communication
+  4   - creation of zombie and orphan processes
+  5a  - implementation of threading
+  5b  - implementation of synchronization
+  6a  - first come first serve
+  6b  - shortest job first
+  6c  - round robin
+  6d  - priority scheduling
+  7a  - process synchronization: producer-consumer problem using semaphore
+  7b  - process synchronization: dining philosophers problem using semaphore
+  10a - simulation of file allocation strategies: linked file allocation
+  10b - simulation of file allocation strategies: indexed file allocation
+
+BASE_USRL/cn/{filename} =>
+  1ai   - Star Topology implementation using packet simulation
+  1aii  - Ring Topology implementation using packet simulation
+  1bi   - Bus Topology implementation (variation i) using packet simulation
+  1bii  - Bus Topology implementation (variation ii) using packet simulation
+  2     - ARP (Address Resolution Protocol) verification using simulation tool
+  3     - Distance Vector Routing Algorithm implementation
+  4     - Link State Routing Algorithm implementation
+  5ac   - Echo Client implemented using TCP in JavaScript
+  5as   - Echo Server implemented using TCP in JavaScript
+  5bc   - Echo Client implemented using UDP in JavaScript
+  5bs   - Echo Server implemented using UDP in JavaScript
+  6c    - Chat Client using TCP sockets in JavaScript
+  6s    - Chat Server using TCP sockets in JavaScript
+  7     - Multi-server configuration using network simulation tool
+  10    - IoT network simulation (Smart Home / Industrial Automation / Environmental)
+  89    - Malware and TCP traffic analysis using Wireshark (8th & 9th experiments)
+  df    - Final version of Distance Vector Routing experiment
+  dv3   - Another variation of Distance Vector Routing (experiment 3)
