@@ -1,33 +1,11 @@
 This server provides access to OS and CN practical files.
 
-OS users can view files in the terminal using:
-curl -s https://nammatha.onrender.com/os/<filename>   # note the small -s for silent output
-
-
 CN users can download files using:
 curl -O https://nammatha.onrender.com/cn/<filename>   # note the capital -O to save the file
 
+NOTE: this is download the file in local folder 
 
-
-https://nammatha.onrender.com/os/{filename} =>
-
-  2   - shell scripting
-  3a  - fork system call
-  3b  - wait system call
-  3c  - exec system call
-  3d  - stat system call
-  3e  - interprocess communication
-  4   - creation of zombie and orphan processes
-  5a  - implementation of threading
-  5b  - implementation of synchronization
-  6a  - first come first serve
-  6b  - shortest job first
-  6c  - round robin
-  6d  - priority scheduling
-  7a  - process synchronization: producer-consumer problem using semaphore
-  7b  - process synchronization: dining philosophers problem using semaphore
-  10a - simulation of file allocation strategies: linked file allocation
-  10b - simulation of file allocation strategies: indexed file allocation
+COMPUTER NETWORKS 
 
 https://nammatha.onrender.com/cn/{filename} =>
 
@@ -52,3 +30,30 @@ https://nammatha.onrender.com/cn/{filename} =>
 
 
 
+
+OPERATING SYSTEM
+
+OS users can view files in the terminal using:
+curl -s https://nammatha.onrender.com/os/<filename>   # note the small -s for silent output
+
+NOTE: this will display the code copy paste it using ctrl+c and right click to paste 
+
+https://nammatha.onrender.com/os/{filename} =>
+
+  2   - shell scripting
+  3a  - fork system call
+  3b  - wait system call
+  3c  - exec system call
+  3d  - stat system call
+  3e  - interprocess communication
+  4   - creation of zombie and orphan processes
+  5a  - implementation of threading
+  5b  - implementation of synchronization
+  6a  - first come first serve
+  6b  - shortest job first
+  6c  - round robin
+  6d  - priority scheduling
+  7a  - process synchronization: producer-consumer problem using semaphore
+  7b  - process synchronization: dining philosophers problem using semaphore
+  10a - simulation of file allocation strategies: linked file allocation
+  10b - simulation of file allocation strategies: indexed file allocation
