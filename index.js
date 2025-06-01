@@ -6,12 +6,15 @@ const app = express();
 const CN_DIR = path.join(__dirname, 'cn');
 const OS_DIR = path.join(__dirname, 'os');
 const CN_EXTS = ['.js', '.pkt', '.pcap'];
-
 let requestCount = 0;
 
-// Request counter
 app.use((req, res, next) => {
-  requestCount++;
+  let ua = req.headers['user-agent'] || '';
+  if (
+    (req.method === 'GET' || !ua.includes('Mozilla')) &&
+    req.path !== '/favicon.ico'
+  )
+    requestCount++;
   next();
 });
 
