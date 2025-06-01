@@ -41,15 +41,17 @@ app.get('/cn/:filename', (req, res) => {
   res.status(404).send('Not found');
 });
 
-// Show bitmapping + request count
-app.use((req, res) => {
-  const file = path.join(__dirname, 'bitmapping.txt');
-  fs.readFile(file, 'utf8', (err, data) => {
+app.use((req, res, next) => {
+  const infoFile = path.join(__dirname, 'bitmapping.txt');
+  fs.readFile(infoFile, 'utf8', (err, data) => {
     if (err)
-      return res.status(404).send(`Not found\nRequests: ${requestCount}`);
-    res.send(`${data}\n\nRequests: ${requestCount}`);
+      return res.status(404).send(`Not Found\nTotal requests: ${requestCount}`);
+
+    res.setHeader('Content-Type', 'text/plain');
+    res.send(data + `\n\nTotal requests: ${requestCount}`);
   });
 });
+
 
 // Error handler
 app.use((err, req, res, next) => {
