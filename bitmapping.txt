@@ -4,7 +4,7 @@ This server provides access to OS and CN practical files.
 
 CN users can download files using: use terminal/command prompt 
 
-curl -O https://nammatha.onrender.com/cn/<filename>   # note the capital -O to save the file
+curl -OJ  https://nammatha.onrender.com/cn/<filename>   # note the capital -OJ  to save the file
 
 NOTE: this is download the file in local folder 
 
