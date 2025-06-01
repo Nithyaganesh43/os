@@ -1,6 +1,9 @@
 This server provides access to OS and CN practical files.
+ 
 
-CN users can download files using:
+
+CN users can download files using: use terminal/command prompt 
+
 curl -O https://nammatha.onrender.com/cn/<filename>   # note the capital -O to save the file
 
 NOTE: this is download the file in local folder 
@@ -33,7 +36,8 @@ https://nammatha.onrender.com/cn/{filename} =>
 
 OPERATING SYSTEM
 
-OS users can view files in the terminal using:
+OS users can view files in the terminal using: use terminal/command prompt  
+
 curl -s https://nammatha.onrender.com/os/<filename>   # note the small -s for silent output
 
 NOTE: this will display the code copy paste it using ctrl+c and right click to paste 
