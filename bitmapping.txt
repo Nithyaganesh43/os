@@ -1,4 +1,16 @@
-BASE_USRL/os/{filename} =>
+This server provides access to OS and CN practical files.
+
+OS users can view files in the terminal using:
+curl -s https://nammatha.onrender.com/os/<filename>   # note the small -s for silent output
+
+
+CN users can download files using:
+curl -O https://nammatha.onrender.com/cn/<filename>   # note the capital -O to save the file
+
+
+
+https://nammatha.onrender.com/os/{filename} =>
+
   2   - shell scripting
   3a  - fork system call
   3b  - wait system call
@@ -17,7 +29,8 @@ BASE_USRL/os/{filename} =>
   10a - simulation of file allocation strategies: linked file allocation
   10b - simulation of file allocation strategies: indexed file allocation
 
-BASE_USRL/cn/{filename} =>
+https://nammatha.onrender.com/cn/{filename} =>
+
   1ai   - Star Topology implementation using packet simulation
   1aii  - Ring Topology implementation using packet simulation
   1bi   - Bus Topology implementation (variation i) using packet simulation
@@ -36,3 +49,6 @@ BASE_USRL/cn/{filename} =>
   89    - Malware and TCP traffic analysis using Wireshark (8th & 9th experiments)
   df    - Final version of Distance Vector Routing experiment
   dv3   - Another variation of Distance Vector Routing (experiment 3)
+
+
+
