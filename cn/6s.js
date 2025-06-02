@@ -2,7 +2,10 @@ const net = require('net');
 const readline = require('readline');
 
 const server = net.createServer((socket) => {
+
+    
     console.log('Client Connected');
+    
     socket.on('data', (data) => {
         console.log('Msg from client:', data.toString());
     });

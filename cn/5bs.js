@@ -8,12 +8,7 @@ server.on('listening', () => {
 
 server.on('message', (msg, rinfo) => {
     console.log(`Received: ${msg.toString()}`);
-    const capitalizedSentence = msg.toString().toUpperCase();
-    server.send(capitalizedSentence, rinfo.port, rinfo.address, (err) => {
-        if (err) {
-            console.error('Error sending response:', err);
-        }
-    });
+    server.send(msg.toString(), rinfo.port, rinfo.address);
 });
 
 server.bind(9876);

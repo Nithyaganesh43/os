@@ -2,6 +2,7 @@ const net = require('net');
 const readline = require('readline');
 
 const client = new net.Socket();
+
 client.connect(3128, 'localhost', () => {
     console.log('Connected to server');
 });

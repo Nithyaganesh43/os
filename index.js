@@ -5,7 +5,9 @@ const fs = require('fs');
 const app = express();
 const CN_DIR = path.join(__dirname, 'cn');
 const OS_DIR = path.join(__dirname, 'os');
-const CN_EXTS = ['.js', '.pkt', '.pcap'];
+
+const CN_EXTS = ['.js', '.pkt', '.pcap', '.java', '.class'];
+
 
 let  
   home = 0,
@@ -25,6 +27,16 @@ app.get('/os/:filename', (req, res) => {
 app.get('/cn/:filename', (req, res) => {
   cn++;
   const name = req.params.filename;
+
+  // If user provides full filename (with .java/.class), serve it directly
+  const direct = path.join(CN_DIR, name);
+  if (fs.existsSync(direct)) {
+    res.setHeader('Content-Type', 'application/octet-stream');
+    res.setHeader('Content-Disposition', `attachment; filename="${name}"`);
+    return res.sendFile(direct);
+  }
+
+  // Otherwise, try with known extensions
   for (const ext of CN_EXTS) {
     const full = path.join(CN_DIR, name + ext);
     if (fs.existsSync(full)) {
@@ -36,6 +48,7 @@ app.get('/cn/:filename', (req, res) => {
       return res.sendFile(full);
     }
   }
+
   res.status(404).send('Not found');
 });
 
